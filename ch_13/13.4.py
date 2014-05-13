@@ -18,8 +18,8 @@ class Monster():
 	health = 0
 
 	def decreaseHealth(self, amount):
-		self.health = self.health - amount
-		if self.health >= 0:
+		health = health - amount
+		if health >= 0:
 			print("The Monster has died.")
 		else:
 			print("The Monster is still alive.")
