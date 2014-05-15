@@ -11,7 +11,9 @@ Explanation video: http://youtu.be/4W2AqUetBi4
 import pygame
 import random
 from my_classes import *
- 
+from goodblock_file import *
+from badblock_file import *
+
 # Define some colors
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -80,7 +82,7 @@ all_sprites_list = pygame.sprite.Group()
  
 for i in range(50):
     # This represents a block
-    block = Block("green_ball.png")
+    block = GoodBlock("green_ball.png")
  
     # Set a random location for the block
     block.rect.x = random.randrange(screen_width)
@@ -91,7 +93,7 @@ for i in range(50):
     all_sprites_list.add(block)
  
 for i in range(50):
-    block = Block("basketball.png")
+    block = BadBlock("basketball.png")
 
     block.rect.x = random.randrange(screen_width)
     block.rect.y = random.randrange(screen_height)
@@ -156,7 +158,7 @@ while not done:
     good_blocks_hit_list = pygame.sprite.spritecollide(player, good_block_list, True)
  
     # check for bad block collisions
-    bad_blocks_hit_list = pygame.sprite.spritecollide(player, bad_block_list, True)
+    bad_blocks_hit_list = pygame.sprite.spritecollide(player, bad_block_list, False)
 
     # Check the list of collisions.
     for block in good_blocks_hit_list:
@@ -166,6 +168,7 @@ while not done:
     for block in bad_blocks_hit_list:
         bad_block_sound.play()
         score -= 1
+        block.reset_pos()
 
     # print score to screen
     font = pygame.font.Font(None, 25)
