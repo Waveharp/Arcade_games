@@ -10,7 +10,7 @@ BLUE = (0, 0, 255)
 pygame.init()
 
 # set screen size
-size = (700, 500)
+size = (697, 500)
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("Game of Badassdom")
