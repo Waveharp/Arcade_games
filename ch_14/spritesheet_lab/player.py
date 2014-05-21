@@ -129,7 +129,7 @@ class Player(pygame.sprite.Sprite):
 
     def jump(self):
         """ called when user hits jump button """
-        self.rect.y += 3
+        self.rect.y += 2
         platform_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
         self.rect.y -= 2
 
@@ -143,7 +143,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = "L"
 
     def go_right(self):
-        self.change_y = 6
+        self.change_x = 6
         self.direction = "R"
 
     def stop(self):

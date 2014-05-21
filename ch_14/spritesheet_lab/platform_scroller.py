@@ -1,6 +1,7 @@
 import pygame
 import constants
 import levels
+import bullets
 from player import Player
 
 def main():
@@ -11,7 +12,7 @@ def main():
 
     screen = pygame.display.set_mode(size)
  
-    pygame.display.set_caption("Platformer with sprite sheets")
+    pygame.display.set_caption("My Platformer")
  
     # Create the player
     player = Player()
@@ -31,7 +32,7 @@ def main():
     player.rect.x = 340
     player.rect.y = constants.SCREEN_HEIGHT - player.rect.height
     active_sprite_list.add(player)
- 
+
     #Loop until the user clicks the close button.
     done = False
  
@@ -51,7 +52,6 @@ def main():
                     player.go_right()
                 if event.key == pygame.K_UP:
                     player.jump()
- 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:
                     player.stop()
@@ -63,14 +63,14 @@ def main():
  
         # Update items in the level
         current_level.update()
-        
+
         # if player gets near right side, shift world left (-x)
         if player.rect.x >= 500:
             diff = player.rect.x - 500
             player.rect.x = 500
             current_level.shift_world(-diff)
 
-        # same with the left side
+        # same with the left side (+x)
         if player.rect.x <= 120:
             diff = 120 - player.rect.x
             player.rect.x = 120
