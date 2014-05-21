@@ -23,10 +23,7 @@ class Platform(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		sprite_sheet = SpriteSheet("tiles_spritesheet.png")
 		# grab image for this platform
-		self.image = sprite_sheet.get_image(sprite_sheet_data[0]),
-											sprite_sheet_data[1],
-											sprite_sheet_data[2],
-											sprite_sheet_data[3])
+		self.image = sprite_sheet.get_image(sprite_sheet_data[0],sprite_sheet_data[1],sprite_sheet_data[2],sprite_sheet_data[3])
 		self.rect = self.image.get_rect()
 
 class MovingPlatform(Platform):

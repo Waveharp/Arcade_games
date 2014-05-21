@@ -4,10 +4,11 @@ import levels
 from player import Player
 
 def main():
-	""" Main Program """
-	pygame.init()
-	# Set the height and width of the screen
+    """ Main Program """
+    pygame.init()
+    # Set the height and width of the screen
     size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
+
     screen = pygame.display.set_mode(size)
  
     pygame.display.set_caption("Platformer with sprite sheets")
@@ -63,3 +64,36 @@ def main():
         # Update items in the level
         current_level.update()
         
+        # if player gets near right side, shift world left (-x)
+        if player.rect.x >= 500:
+            diff = player.rect.x - 500
+            player.rect.x = 500
+            current_level.shift_world(-diff)
+
+        # same with the left side
+        if player.rect.x <= 120:
+            diff = 120 - player.rect.x
+            player.rect.x = 120
+            current_level.shift_world(diff)
+
+        # if player gets to end of level, go to next level
+        current_position = player.rect.x + current_level.world_shift
+        if current_position < current_level.level_limit:
+            player.rect.x = 120
+            if current_level_no < len(level_list)-1:
+                current_level_no += 1
+                current_level = level_list[current_level_no]
+                player.level = current_level
+
+        # all code to draw goes below this
+        current_level.draw(screen)
+        active_sprite_list.draw(screen)
+
+        clock.tick(60)
+
+        pygame.display.flip()
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
