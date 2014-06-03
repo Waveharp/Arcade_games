@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "platform_scroller.py", line 99, in <module>
+  File "platform_scroller.py", line 18, in main
+  File "player.pyo", line 27, in __init__
+  File "spritesheet_functions.pyo", line 16, in __init__
+pygame.error: Couldn't open p1_walk.png
+Traceback (most recent call last):
+  File "platform_scroller.py", line 99, in <module>
+  File "platform_scroller.py", line 18, in main
+  File "player.pyo", line 27, in __init__
+  File "spritesheet_functions.pyo", line 16, in __init__
+pygame.error: Couldn't open p1_walk.png
