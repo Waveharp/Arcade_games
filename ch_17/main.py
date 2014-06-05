@@ -16,6 +16,7 @@ BLACK    = (   0,   0,   0)
 WHITE    = ( 255, 255, 255)
 GREEN    = (   0, 255,   0)
 RED      = ( 255,   0,   0)
+BLUE     = (0, 0, 255)
  
 pygame.init()
  
@@ -31,6 +32,30 @@ done = False
 width = 20
 height = 20
 margin = 5 
+x = 0
+y = 0
+
+# text stuff
+font = pygame.font.SysFont('Calibri', 25, True, False)
+click_text = font.render("click", True, WHITE)
+
+# create a grid of numbers
+# create an empty list
+grid = []
+# loop for each row
+for row in range(10):
+    # for each row, create a list that will represent an entire row
+    grid.append([])
+    # loop for each column
+    for column in range(10):
+        # add the number 0 to current row
+        grid[row].append(0)
+
+# you could also do this using list comp:
+# grid = [[0 for x in range(10)] for y in range(10)]
+
+# set row 1, column 5 to zero
+grid[1][5] = 1
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
@@ -41,17 +66,30 @@ while not done:
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
             done = True # Flag that we are done so we exit this loop
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            print("Click: ", pos)
  
     # --- Game logic should go here
  
     # --- Drawing code should go here
+
+    # get mouse position
+    pos = pygame.mouse.get_pos()
+    mouse_x = pos[0]
+    mouse_y = pos[1]
  
     # First, clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
+    # above this, or they will be erased with this command
     screen.fill(BLACK)
+    for row in range(10):
+        for column in range(10):
+            color = BLUE
+            if grid[row][column] == 1:
+                color = RED
+            pygame.draw.rect(screen, color,[(width+margin)*column+margin, 
+                                        (height+margin)*row+margin, width, height])
 
     
-    pygame.draw.rect(screen, WHITE,[x,y,width,height])
     
  
     # --- Go ahead and update the screen with what we've drawn.
