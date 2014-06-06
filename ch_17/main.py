@@ -1,3 +1,4 @@
+
 """
  Show how to use a sprite backed by a graphic.
  
@@ -32,8 +33,6 @@ done = False
 width = 20
 height = 20
 margin = 5 
-x = 0
-y = 0
 
 # text stuff
 font = pygame.font.SysFont('Calibri', 25, True, False)
@@ -67,7 +66,14 @@ while not done:
         if event.type == pygame.QUIT: # If user clicked close
             done = True # Flag that we are done so we exit this loop
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            print("Click: ", pos)
+            # user clicks mouse, get position
+            pos = pygame.mouse.get_pos()
+            # change x/y screen coords to grid coords
+            column = pos[0] // (width + margin)
+            row = pos[1] // (height + margin)
+            # set that location to zero
+            grid[row][column] = 1
+            print("Click: ", pos, "Grid coords: ", row, ",", column)
  
     # --- Game logic should go here
  
@@ -77,6 +83,9 @@ while not done:
     pos = pygame.mouse.get_pos()
     mouse_x = pos[0]
     mouse_y = pos[1]
+
+    # convert mouse position to grid coordinates
+
  
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command
@@ -87,7 +96,7 @@ while not done:
             if grid[row][column] == 1:
                 color = RED
             pygame.draw.rect(screen, color,[(width+margin)*column+margin, 
-                                        (height+margin)*row+margin, width, height])
+                                            (height+margin)*row+margin, width, height])
 
     
     
